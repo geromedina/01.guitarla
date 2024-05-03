@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCart } from "../hooks/useCart";
 
 function Header({
   cart,
@@ -6,17 +6,9 @@ function Header({
   increaseQuantity,
   decreaseQuantity,
   clearCart,
+  isEmpty,
+  cartTotal,
 }) {
-  // State Derivado
-  /* Aca utilizo el Hook de useMemo para mejorar el perfomance, si veo que me funciona lo uso, si veo que no me actualiza bien el cache de mis componentes no lo uso.
-     el array de dependecias apuntando a cart espera que se modifique algo en cart para hacer los cambios. */
-  const isEmpty = useMemo(() => cart.length === 0, [cart]);
-  // El 0 que pongo al final es para indicar que el acumulador empiece en 0.
-  const cartTotal = useMemo(
-    () => cart.reduce((total, item) => total + item.quantity * item.price, 0),
-    [cart]
-  );
-
   return (
     <header className="py-5 header">
       <div className="container-xl">
